@@ -41,6 +41,7 @@ async function getCountryData(name)
 
 function showCountryDetails(country)
 {
+    const flagUrl = country.flags.svg;
     const capital = country.capital;
     const population = country.population.toLocaleString();
     const currency = Object.values(country.currencies)[0].name;
@@ -48,13 +49,25 @@ function showCountryDetails(country)
     const area = country.area.toLocaleString();
     const mapLink = Object.values(country.maps)[0];
 
-
+    addFlagImage(flagUrl, countryDetailsList);
     addListItem("Capital: " + capital, countryDetailsList);
     addListItem("Population: " + population, countryDetailsList);
     addListItem("Currency: " + currency, countryDetailsList);
     addListItem("Language: " + language, countryDetailsList);
     addListItem("Area: " + area + ' km²', countryDetailsList);
     addLinkToList("Map: " + mapLink, "Google Maps", countryDetailsList);
+}
+
+function addFlagImage(url, list)
+{
+    const liElement = document.createElement('li');
+    liElement.classList.add('flag-container');
+    const img = document.createElement('img');
+    img.src = url;
+    img.classList.add("country-flag"); // CSS class for the image itself
+
+    liElement.append(img);
+    list.append(liElement);
 }
 
 function addListItem(text, list)
