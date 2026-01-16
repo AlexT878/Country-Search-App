@@ -1,3 +1,133 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    background-color: antiquewhite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5; 
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 50px;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.searchBox {
+    background: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    height: 50px;
+    border-radius: 25px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    display: flex;
+    align-items: center;
+    padding: 5px 5px 5px 20px; 
+    margin-bottom: 20px;
+    border: 1px solid transparent; 
+    transition: box-shadow 0.3s;
+}
+
+.searchBox:focus-within {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    border-color: #dfe1e5;
+}
+
+input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    background: transparent; 
+}
+
+button {
+    background-color: #1a73e8; 
+    color: white;
+    border: none;
+    height: 40px;
+    padding: 0 25px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #1557b0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+#error_msg {
+    color: #333;
+    font-weight: 500;
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+#details_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px 30px; 
+    list-style: none;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 50px;
+}
+
+#details_list:empty {
+    display: none;
+    padding: 0;
+    box-shadow: none;
+}
+
+.flag-container {
+    grid-column: span 2; 
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.country-flag {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+}
+
+#details_list li:not(.flag-container) {
+    font-size: 15px;
+    color: #444;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+#details_list li a {
+    text-decoration: none;
+    color: #1a73e8; 
+    font-weight: 600;
+}
+
+#details_list li a:hover {
+    text-decoration: underline;
 }
