@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Country Search</title>
 </head>
 
@@ -15,21 +14,26 @@
 
     <div class="main-layout">
         <main class="search-container">
-            <div class="searchBox">
-                <input type="text" id="country_input" placeholder="Enter country name: ">
-                <button id="search_button">Search</button>
-            </div>
+            <form class="search-box" id="search_form">
+                <label for="country_input" class="visually-hidden">Search for a country</label>
+                <input type="search" id="country_input" name="country" placeholder="Enter country name: " autocomplete="country-name" required>
+                <button type="submit" id="search_button">Search</button>
+            </form>
 
-            <section class="history-section">
-                <ul id="recentlySearchedCountries_list"></ul>
+            <section class="history-section" aria-labelledby="history-reading">
+                <h2 id="history-reading" class="visually-hidden">Search History</h2>
+                <ul id="search-history-list"></ul>
             </section>
 
-            <p id="error_msg"></p>
-            <ul id="details_list"></ul>
+            <section aria-labelledby="results_heading">
+                <h2 id="results_heading" class="visually-hidden">Search results</h2>
+                <p id="error_msg" role="alert"></p>
+                <ul id="details_list"></ul>
+            </section>
         </main>
 
-        <aside class="sidebar-favorites">
-            <h3>Favorites</h3>
+        <aside class="sidebar-favorites" aria-labelledby="fav_heading">
+            <h2 id="fav_heading">Favorites</h2>
             <ul>
                 <li>List is empty</li>
             </ul>
@@ -40,7 +44,6 @@
         <p>Country Search App &copy; 2026</p>
     </footer>
 
-    <script type="module" src="app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

@@ -1,10 +1,12 @@
-const searchButton = document.getElementById("search_button");
+const searchForm = document.getElementById("search_form");
 const inputText = document.getElementById("country_input");
 const countryDetailsList = document.getElementById("details_list");
 const errorMsg = document.getElementById("error_msg");
-const recentlySearchedCountriesList = document.getElementById("recentlySearchedCountries_list");
+const recentlySearchedCountriesList = document.getElementById("search-history-list");
 
-searchButton.addEventListener("click", async () => {
+searchForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
     const countryName = inputText.value.trim(); // Trim to remove extra spaces
 
     errorMsg.textContent = "";
