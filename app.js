@@ -64,19 +64,18 @@ function showCountryDetails(country)
     addLinkToList("Map: " + mapLink, "Google Maps", countryDetailsList, true);
     
     const liFavorite = document.createElement('li');
-    const favoritesButton = document.createElement('button');
-    favoritesButton.id = "favorites-button";
-    favoritesButton.addEventListener("click", () => addToFavorites(country.name.common, favoritesButton));
-    liFavorite.append(favoritesButton);
-    countryDetailsList.append(liFavorite);
+    const template = document.getElementById('star-template');
+    const starClone = template.content.cloneNode(true);
+    const favoritesButton = starClone.querySelector('.star-btn');
+
     if (isCountryFavorite(country.name.common)) 
     {
-        favoritesButton.textContent = "REMOVE";
+        favoritesButton.classList.add('active');
     }
-    else 
-    {
-        favoritesButton.textContent = "ADD";
-    }
+
+    favoritesButton.addEventListener("click", () => addToFavorites(country.name.common, favoritesButton));
+    
+    countryDetailsList.append(favoritesButton);
 }
 
 function isCountryFavorite(name) {
@@ -88,17 +87,12 @@ function addToFavorites(name, button)
 {
     let favoritesData = JSON.parse(localStorage.getItem("countryFavorites")) || [];
 
-    const index = favoritesData.indexOf(name);
-
-    if(index > -1)
-    {
-        favoritesData.splice(index, 1);
-        button.textContent = "ADD";
-    }
-    else
-    {
+    if (isCountryFavorite(name)) {
+        favoritesData = favoritesData.filter(country => country !== name);
+        button.classList.remove('active');
+    } else {
         favoritesData.unshift(name);
-        button.textContent = "REMOVE";
+        button.classList.add('active');
     }
 
     localStorage.setItem("countryFavorites", JSON.stringify(favoritesData));
