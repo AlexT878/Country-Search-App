@@ -1,2 +1,2 @@
 # Country Search App
-<img width="885" height="536" alt="Screenshot 2026-01-19 at 15 03 00" src="https://github.com/user-attachments/assets/902ee729-dabb-4992-a06a-1879fe301eb0" />
+<img width="1920" height="967" alt="Screenshot 2026-01-20 at 17 38 06" src="https://github.com/user-attachments/assets/71ada08a-e494-404a-abe4-f2afed144a12" />
