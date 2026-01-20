@@ -3,6 +3,7 @@ const inputText = document.getElementById("country_input");
 const countryDetailsList = document.getElementById("details_list");
 const errorMsg = document.getElementById("error_msg");
 const recentlySearchedCountriesList = document.getElementById("search-history-list");
+const favoritesList = document.getElementById("favorites_list");
 
 searchForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -61,6 +62,65 @@ function showCountryDetails(country)
     addListItem("Language: " + language, countryDetailsList, true);
     addListItem("Area: " + area + ' km²', countryDetailsList, true);
     addLinkToList("Map: " + mapLink, "Google Maps", countryDetailsList, true);
+    
+    const liFavorite = document.createElement('li');
+    const favoritesButton = document.createElement('button');
+    favoritesButton.id = "favorites-button";
+    favoritesButton.addEventListener("click", () => addToFavorites(country.name.common, favoritesButton));
+    liFavorite.append(favoritesButton);
+    countryDetailsList.append(liFavorite);
+    if (isCountryFavorite(country.name.common)) 
+    {
+        favoritesButton.textContent = "REMOVE";
+    }
+    else 
+    {
+        favoritesButton.textContent = "ADD";
+    }
+}
+
+function isCountryFavorite(name) {
+    const favoritesData = JSON.parse(localStorage.getItem("countryFavorites")) || [];
+    return favoritesData.includes(name);
+}
+
+function addToFavorites(name, button)
+{
+    let favoritesData = JSON.parse(localStorage.getItem("countryFavorites")) || [];
+
+    const index = favoritesData.indexOf(name);
+
+    if(index > -1)
+    {
+        favoritesData.splice(index, 1);
+        button.textContent = "ADD";
+    }
+    else
+    {
+        favoritesData.unshift(name);
+        button.textContent = "REMOVE";
+    }
+
+    localStorage.setItem("countryFavorites", JSON.stringify(favoritesData));
+    renderFavorites();
+}
+
+function renderFavorites()
+{
+    const favoritesData = JSON.parse(localStorage.getItem("countryFavorites")) || [];
+
+    favoritesList.innerHTML = "";
+
+    if (favoritesData.length === 0) {
+        favoritesList.innerHTML = "<li>List is empty</li>";
+        return;
+    }
+
+    favoritesData.forEach(name => {
+        const li = document.createElement("li");
+        li.textContent = name;
+        favoritesList.append(li);
+    });
 }
 
 function addFlagImage(url, list)
@@ -108,6 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
         newListElement.textContent = country;
         recentlySearchedCountriesList.append(newListElement);
     });
+
+    renderFavorites();
 }); 
 
 function addToHistory(name)
