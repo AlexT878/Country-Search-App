@@ -1,6 +1,6 @@
 import { getCountryData } from "./service.js";
 import { addToHistory } from "./storage.js";
-import { addListItem } from "./ui.js";
+import { addListItem, renderHistory } from "./ui.js";
 import { showCountryDetails } from "./ui.js";
 import { renderFavorites } from "./ui.js";
 
@@ -8,7 +8,6 @@ const searchForm = document.getElementById("search_form");
 const inputText = document.getElementById("country_input");
 const countryDetailsList = document.getElementById("details_list");
 const errorMsg = document.getElementById("error_msg");
-const recentlySearchedCountriesList = document.getElementById("search-history-list");
 
 searchForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -29,7 +28,7 @@ searchForm.addEventListener("submit", async (e) => {
         errorMsg.textContent = "";
         showCountryDetails(country, countryDetailsList);
         addToHistory(countryName);
-        addListItem(countryName, recentlySearchedCountriesList, false);
+        renderHistory();
     } catch (error)
     {
         console.log(error);
@@ -39,11 +38,6 @@ searchForm.addEventListener("submit", async (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const countries = JSON.parse(localStorage.getItem("countryHistory")) || [];
-
-    countries.forEach(country => {
-        addListItem(country, recentlySearchedCountriesList, true);
-    });
-
+    renderHistory();
     renderFavorites();
 }); 
