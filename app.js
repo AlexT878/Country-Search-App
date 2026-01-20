@@ -2,6 +2,7 @@ const searchButton = document.getElementById("search_button");
 const inputText = document.getElementById("country_input");
 const countryDetailsList = document.getElementById("details_list");
 const errorMsg = document.getElementById("error_msg");
+const recentlySearchedCountriesList = document.getElementById("recentlySearchedCountries_list");
 
 searchButton.addEventListener("click", async () => {
     const countryName = inputText.value.trim(); // Trim to remove extra spaces
@@ -19,8 +20,10 @@ searchButton.addEventListener("click", async () => {
         const country = await getCountryData(countryName);
         errorMsg.textContent = "";
         showCountryDetails(country);
+        addToHistory(countryName);
     } catch (error)
     {
+        console.log(error);
         errorMsg.textContent = "Country not found. Try again";
     }
     
@@ -50,12 +53,12 @@ function showCountryDetails(country)
     const mapLink = Object.values(country.maps)[0];
 
     addFlagImage(flagUrl, countryDetailsList);
-    addListItem("Capital: " + capital, countryDetailsList);
-    addListItem("Population: " + population, countryDetailsList);
-    addListItem("Currency: " + currency, countryDetailsList);
-    addListItem("Language: " + language, countryDetailsList);
-    addListItem("Area: " + area + ' km²', countryDetailsList);
-    addLinkToList("Map: " + mapLink, "Google Maps", countryDetailsList);
+    addListItem("Capital: " + capital, countryDetailsList, true);
+    addListItem("Population: " + population, countryDetailsList, true);
+    addListItem("Currency: " + currency, countryDetailsList, true);
+    addListItem("Language: " + language, countryDetailsList, true);
+    addListItem("Area: " + area + ' km²', countryDetailsList, true);
+    addLinkToList("Map: " + mapLink, "Google Maps", countryDetailsList, true);
 }
 
 function addFlagImage(url, list)
@@ -70,11 +73,18 @@ function addFlagImage(url, list)
     list.append(liElement);
 }
 
-function addListItem(text, list)
+function addListItem(text, list, end)
 {
     const liElement = document.createElement('li');
     liElement.textContent = text;
-    list.append(liElement);
+    if(end)
+    {
+        list.append(liElement);
+    }
+    else
+    {
+        list.prepend(liElement);
+    }
 }
 
 function addLinkToList(link, text, list)
@@ -86,6 +96,31 @@ function addLinkToList(link, text, list)
     liLink.target="_blank";
     liElement.append(liLink);
     list.append(liElement);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const countries = JSON.parse(localStorage.getItem("countryHistory")) || [];
+
+    countries.forEach(country => {
+        let newListElement = document.createElement('li');
+        newListElement.textContent = country;
+        recentlySearchedCountriesList.append(newListElement);
+    });
+}); 
+
+function addToHistory(name)
+{
+    let historyData = JSON.parse(localStorage.getItem("countryHistory")) || []; // Empty array if there is no country
+
+    historyData.unshift(name);
+
+    if(historyData.length > 10)
+    {
+        historyData = historyData.slice(0, 10);
+    }
+    console.log(JSON.stringify(historyData))
+    localStorage.setItem("countryHistory", JSON.stringify(historyData));
+    addListItem(name, recentlySearchedCountriesList, false);
 }
 
 // API GET https://restcountries.com/v3.1/all
