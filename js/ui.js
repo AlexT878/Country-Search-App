@@ -2,6 +2,7 @@ import { isCountryFavorite } from "./storage.js";
 import { addToFavorites } from "./storage.js";
 
 const favoritesList = document.getElementById("favorites_list");
+const historyList = document.getElementById("search-history-list");
 
 export function addListItem(text, list, end)
 {
@@ -103,4 +104,23 @@ export function renderFavorites()
         li.textContent = name;
         favoritesList.append(li);
     });
+}
+
+export function renderHistory()
+{
+    const historyData = JSON.parse(localStorage.getItem("countryHistory")) || [];
+
+    historyList.innerHTML = "";
+
+    if(historyData.length == 0)
+    {
+        historyList.innerHTML="";
+        return;
+    }
+
+    historyData.forEach(name => {
+        const li = document.createElement("li");
+        li.textContent = name;
+        historyList.append(li);
+    })
 }
