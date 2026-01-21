@@ -1,0 +1,11 @@
+@use 'utils/variabiles';
+@use 'elements/header';
+@use 'elements/search';
+@use 'elements/details';
+@use 'elements/sidebar';
+@use 'elements/responsive';
+@use 'elements/base';
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+// sass --watch sass:css

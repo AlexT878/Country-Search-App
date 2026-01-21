@@ -1,0 +1,24 @@
+@mixin flex-layout($justify, $align, $wrap: no-wrap)
+{
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+}
+
+@mixin stylize-button($font-size, $color, $bgcolor, $border, $border-radius, $font-weight, $cursor: pointer)
+{
+    font-size: $font-size;
+    color: $color;
+    background-color: $bgcolor;
+    border: $border;
+    border-radius: $border-radius;
+    font-weight: $font-weight;
+}
+
+%card-base {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}

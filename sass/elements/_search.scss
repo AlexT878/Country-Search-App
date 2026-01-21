@@ -1,3 +1,5 @@
+@use '../utils/mixins';
+
 .search-container {
     flex: 3;
     min-width: 300px;
@@ -6,10 +8,7 @@
 .search-box {
     display: flex;
     gap: 10px;
-    background: var(--white);
-    padding: 1.5rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 15px -3px rgba(37, 50, 55, 0.1);
+    @extend %card-base;
     margin-bottom: 1.5rem;
 }
 
@@ -28,13 +27,8 @@
 }
 
 #search_button {
+    @include mixins.stylize-button(16px, var(--white), var(--light-jet-black), none, 10px, 600);
     padding: 10px 16px;
-    background-color: var(--light-jet-black);
-    color: var(--white);
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 16px;
     cursor: pointer;
     transition: opacity 0.2s;
 }
@@ -47,10 +41,8 @@
     list-style: none;
     padding: 0;
     margin: 0 0 2rem 0;
-    display: flex;
-    flex-wrap: wrap;
+    @include mixins.flex-layout(center, center, wrap);
     gap: 10px;
-    justify-content: center;
 }
 
 .history-section ul li {
