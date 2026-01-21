@@ -2,11 +2,21 @@ export function addToHistory(name)
 {
     let historyData = JSON.parse(localStorage.getItem("countryHistory")) || []; // Empty array if there is no country
 
-    historyData.unshift(name);
-
-    if(historyData.length > 10)
+    let index = historyData.indexOf(name);
+    if(index > -1)
     {
-        historyData = historyData.slice(0, 10);
+        console.log(index);
+        let temp = historyData[index];
+        historyData[index] = historyData[0];
+        historyData[0] = temp;
+    }
+    else
+    {
+        historyData.unshift(name);
+        if(historyData.length > 10)
+        {
+            historyData = historyData.slice(0, 10);
+        }
     }
     console.log(JSON.stringify(historyData))
     localStorage.setItem("countryHistory", JSON.stringify(historyData));

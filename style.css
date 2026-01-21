@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+/* Definire Paletă Tech-Steel */
+:root {
+    --light-cyan: #e0fbfc;
+    --light-blue: #c2dfe3;
+    --cool-steel: #9db4c0;
+    --blue-slate: #5c6b73;
+    --jet-black: #253237;
+    --black: #1b2529;
+    --black2: #182125;
+    --white: #ffffff;
+    --star-yellow: #ffff00;
+}
+
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -12,10 +25,52 @@
     border: 0;
 }
 
+.navbar {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.nav-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar h1 {
+    font-size: 24px;
+    letter-spacing: 1px;
+    flex: 1;
+    text-align: left;
+}
+
+.nav-center h2 {
+    padding: 0 1rem;
+}
+
+.nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sign-in {
+    background-color: var(--black);
+    padding: 0.5rem 1rem;
+    border-radius: 40px;
+    border: 2px solid var(--black2);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    color: var(--light-cyan);
+    font-weight: 600;
+}
+
+
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
+    background-color: var(--light-cyan);
+    color: var(--jet-black);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -23,18 +78,38 @@ body {
 }
 
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 1.5rem 0;
+    position: relative;
+    background: linear-gradient(135deg, var(--jet-black) 0%, var(--blue-slate) 100%);
+    color: var(--white);
+    padding: 1rem 0;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     margin-bottom: 2rem;
 }
 
-header h1 {
-    margin: 0;
-    font-weight: 600;
-    letter-spacing: 1px;
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("res/header-background-img.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.7) contrast(1.1);
+    mix-blend-mode: overlay;
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.navbar, header h2 {
+    position: relative;
+    z-index: 1;
+}
+
+header h2 {
+    font-size: 20px;
 }
 
 .main-layout {
@@ -57,38 +132,40 @@ header h1 {
 .search-box {
     display: flex;
     gap: 10px;
-    background: white;
+    background: var(--white);
     padding: 1.5rem;
     border-radius: 16px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(37, 50, 55, 0.1);
     margin-bottom: 1.5rem;
 }
 
 #country_input {
     flex-grow: 1;
     padding: 12px 20px;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--light-blue);
     border-radius: 10px;
     font-size: 1rem;
     outline: none;
+    color: var(--jet-black);
 }
 
 #country_input:focus {
-    border-color: #764ba2;
+    border-color: var(--blue-slate);
 }
 
 #search_button {
     padding: 12px 25px;
-    background-color: #764ba2;
-    color: white;
+    background-color: var(--blue-slate);
+    color: var(--white);
     border: none;
     border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
+    transition: opacity 0.2s;
 }
 
 #search_button:hover {
-    background-color: #5b3a82;
+    background-color: var(--jet-black);
 }
 
 .history-section ul {
@@ -102,24 +179,23 @@ header h1 {
 }
 
 .history-section ul li {
-    background-color: #e0e7ff;
-    color: #4338ca;
+    background-color: var(--light-blue);
+    color: var(--jet-black);
     padding: 6px 16px;
     border-radius: 20px;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
-    border: 1px solid transparent;
 }
 
 .history-section ul li:hover {
-    background-color: #4338ca;
-    color: white;
+    background-color: var(--blue-slate);
+    color: var(--white);
 }
 
 #error_msg {
     text-align: center;
-    color: #ef4444;
+    color: #b91c1c;
     font-weight: 600;
     min-height: 20px;
     margin-bottom: 1rem;
@@ -132,7 +208,7 @@ header h1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem 2rem;
-    background: white;
+    background: var(--white);
     border-radius: 20px;
     position: relative;
 }
@@ -174,7 +250,7 @@ header h1 {
 
 .star-btn.active .star-icon {
     fill: #fbbf24; 
-    filter: drop-shadow(0 0 3px rgba(251, 191, 36, 0.6));
+    filter: drop-shadow(0 0 3px var(--light-blue));
 }
 
 #details_list:empty {
@@ -183,21 +259,21 @@ header h1 {
 
 #details_list:not(:empty) {
     padding: 2rem;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    border: 1px solid #f3f4f6;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--light-blue);
 }
 
 #details_list li {
     font-size: 1.05rem;
     padding: 8px 0;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--light-cyan);
     display: flex;
     align-items: center;
 }
 
 #details_list li a {
     text-decoration: none;
-    color: #2563eb;
+    color: var(--blue-slate);
     font-weight: 600;
 }
 
@@ -214,24 +290,24 @@ header h1 {
     width: 100%;
     height: auto;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     object-fit: cover;
 }
 
 .sidebar-favorites {
     flex: 1;
-    background: white;
+    background: var(--white);
     padding: 1.5rem;
     border-radius: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     height: fit-content;
 }
 
 .sidebar-favorites h2 {
     margin-top: 0;
     font-size: 1.25rem;
-    color: #4b5563;
-    border-bottom: 2px solid #e5e7eb;
+    color: var(--jet-black);
+    border-bottom: 2px solid var(--cool-steel);
     padding-bottom: 10px;
     margin-bottom: 15px;
 }
@@ -248,14 +324,14 @@ header h1 {
 }
 
 .sidebar-favorites li:not(:first-child):hover {
-    background-color: #f3f4f6;
+    background-color: var(--light-cyan);
 }
 
 footer {
     text-align: center;
     padding: 2rem;
     margin-top: auto;
-    color: #6b7280;
+    color: var(--blue-slate);
     font-size: 0.9rem;
 }
 
