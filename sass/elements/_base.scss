@@ -39,3 +39,7 @@ footer {
     color: var(--blue-slate);
     font-size: 0.9rem;
 }
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}

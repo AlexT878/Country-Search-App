@@ -16,6 +16,12 @@
     font-weight: $font-weight;
 }
 
+@mixin break-at($width: 768px) {
+    @media (max-width: $width) {
+        @content;
+    }
+}
+
 %card-base {
     background: var(--white);
     padding: 1.5rem;
