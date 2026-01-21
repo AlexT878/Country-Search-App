@@ -1,0 +1,32 @@
+.sidebar-favorites {
+    flex: 1;
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+}
+
+.sidebar-favorites h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: var(--jet-black);
+    border-bottom: 2px solid var(--cool-steel);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.sidebar-favorites ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-favorites li {
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.sidebar-favorites li:not(:first-child):hover {
+    background-color: var(--light-cyan);
+}
