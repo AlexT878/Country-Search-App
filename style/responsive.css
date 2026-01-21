@@ -1,0 +1,14 @@
+@media (max-width: 768px) {
+    .main-layout {
+        flex-direction: column;
+    }
+    
+    #details_list {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar-favorites {
+        width: 100%;
+        order: 2;
+    }
+}

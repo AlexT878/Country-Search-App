@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url("variabiles.css");
+@import url("header.css");
+@import url("search.css");
+@import url("details.css");
+@import url("sidebar.css");
+@import url("responsive.css");
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-cyan);
+    color: var(--jet-black);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.main-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: flex-start;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: auto;
+    color: var(--blue-slate);
+    font-size: 0.9rem;
+}

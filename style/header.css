@@ -1,0 +1,75 @@
+.navbar {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.nav-center {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar h1 {
+    font-size: 24px;
+    letter-spacing: 1px;
+    flex: 1;
+    text-align: left;
+}
+
+.nav-center h2 {
+    padding: 0 1rem;
+}
+
+.nav-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sign-in {
+    background-color: var(--black);
+    padding: 0.5rem 1rem;
+    border-radius: 40px;
+    border: 2px solid var(--black2);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    color: var(--light-cyan);
+    font-weight: 600;
+}
+
+header {
+    position: relative;
+    background: linear-gradient(135deg, var(--jet-black) 0%, var(--blue-slate) 100%);
+    color: var(--white);
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../res/header-background-img.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.7) contrast(1.1);
+    mix-blend-mode: overlay;
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.navbar, header h2 {
+    position: relative;
+    z-index: 1;
+}
+
+header h2 {
+    font-size: 20px;
+}
