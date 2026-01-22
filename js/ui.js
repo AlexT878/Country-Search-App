@@ -40,6 +40,27 @@ export function showCountryDetails(country, list)
     addListItem("Area: " + area + ' km²', list, true);
     addLinkToList("Map: " + mapLink, "Google Maps", list, true);
     renderFavoriteButton(country, list);
+
+    if(isCountryFavorite(country.name.common)) {
+        const region = country.region;
+        const drivingSide = country.car.side;
+        const [first, ...rest] = drivingSide;
+        const drivingSideFormatted = first.toUpperCase() + rest.join('');
+        const unMember = country.unMember;
+        const timezone = country.timezones[1];
+        console.log(timezone);
+        addListItem("Region: " + region, list, true);
+        addListItem("Driving side: " + drivingSideFormatted, list, true);
+        if(unMember == true)
+        {
+            addListItem("UN Member: Yes", list, true);
+        }
+        else
+        {
+            addListItem("UN Member: No", list, true);
+        }
+        addListItem("Timezone: " + timezone, list, true);
+    }
 }
 
 function renderFavoriteButton(country, list)
@@ -63,6 +84,7 @@ function renderFavoriteButton(country, list)
         {
             favoritesButton.classList.add('active');
         }
+        showCountryDetails(country, countryDetailsList);
         renderFavorites();
     })
     
@@ -105,7 +127,10 @@ export function renderFavorites()
     favoritesData.forEach(country => {
         const span = document.createElement("span");
         const img = document.createElement("img");
+        const del = document.createElement("span");
+        del.textContent = "X";
         span.textContent = country.name;
+        del.classList.add("del-button-favorites");
         img.src = country.url;
         img.classList.add("country-flag-favorites"); 
         img.addEventListener("click", async () => {
@@ -114,9 +139,23 @@ export function renderFavorites()
         span.addEventListener("click", async () => {
             showCountryDetails(await getCountryData(country.name), countryDetailsList);
         })
+        del.addEventListener("click", async () => {
+            let searchedCountry = await getCountryData(country.name);
+            if(addToFavorites(searchedCountry))
+            {
+                del.classList.remove('active');
+            }
+            else
+            {
+                del.classList.add('active');
+            }
+            renderFavorites();
+            showCountryDetails(searchedCountry, countryDetailsList);
+        })
 
         favoritesLists.appendChild(span);
         favoritesLists.appendChild(img);
+        favoritesLists.appendChild(del);
     });
 }
 

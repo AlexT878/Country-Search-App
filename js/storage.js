@@ -13,9 +13,9 @@ export function addToHistory(name)
     else
     {
         historyData.unshift(name);
-        if(historyData.length > 10)
+        if(historyData.length > 8)
         {
-            historyData = historyData.slice(0, 10);
+            historyData = historyData.slice(0, 8);
         }
     }
     console.log(JSON.stringify(historyData))

@@ -311,17 +311,21 @@ header h2 {
 
 #favorites_lists {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr 0.3fr;
   align-items: center;
 }
 #favorites_lists span {
   cursor: pointer;
 }
+#favorites_lists .del-button-favorites {
+  justify-self: flex-end;
+}
 
 .country-flag-favorites {
   height: 2.5rem;
   padding: 0.5rem;
-  justify-self: end;
+  justify-self: center;
+  align-items: center;
   filter: drop-shadow(0 0 3px var(--light-blue));
   cursor: pointer;
 }
