@@ -5,6 +5,8 @@ import { addToFavorites } from "./storage.js";
 const historyList = document.getElementById("search-history-list");
 const favoritesLists = document.getElementById("favorites_lists");
 const countryDetailsList = document.getElementById("details_list");
+let favoritesButton;
+let currentCountryName = "";
 
 export function addListItem(text, list, end)
 {
@@ -23,6 +25,7 @@ export function addListItem(text, list, end)
 export function showCountryDetails(country, list)
 {
     list.textContent = "";
+    currentCountryName = country.name.common;
 
     const flagUrl = country.flags.svg;
     const capital = country.capital;
@@ -47,8 +50,8 @@ export function showCountryDetails(country, list)
         const [first, ...rest] = drivingSide;
         const drivingSideFormatted = first.toUpperCase() + rest.join('');
         const unMember = country.unMember;
-        const timezone = country.timezones[1];
-        console.log(timezone);
+        const internetDomain = country.tld[0];
+        console.log(internetDomain);
         addListItem("Region: " + region, list, true);
         addListItem("Driving side: " + drivingSideFormatted, list, true);
         if(unMember == true)
@@ -59,7 +62,7 @@ export function showCountryDetails(country, list)
         {
             addListItem("UN Member: No", list, true);
         }
-        addListItem("Timezone: " + timezone, list, true);
+        addListItem("Internet domain: " + internetDomain.toUpperCase(), list, true);
     }
 }
 
@@ -68,7 +71,7 @@ function renderFavoriteButton(country, list)
     const countryName = country.name.common;
     const template = document.getElementById('star-template');
     const starClone = template.content.cloneNode(true);
-    const favoritesButton = starClone.querySelector('.star-btn');
+    favoritesButton = starClone.querySelector('.star-btn');
 
     if (isCountryFavorite(countryName)) 
     {
@@ -127,8 +130,8 @@ export function renderFavorites()
     favoritesData.forEach(country => {
         const span = document.createElement("span");
         const img = document.createElement("img");
-        const del = document.createElement("span");
-        del.textContent = "X";
+        const del = document.createElement("i");
+        del.className = "fa-solid fa-trash-can del-button-favorites";
         span.textContent = country.name;
         del.classList.add("del-button-favorites");
         img.src = country.url;
@@ -144,17 +147,23 @@ export function renderFavorites()
             if(addToFavorites(searchedCountry))
             {
                 del.classList.remove('active');
+                if(currentCountryName == country.name)
+                {
+                    favoritesButton.classList.remove('active');
+                }
             }
             else
             {
                 del.classList.add('active');
+                if(currentCountryName == country.name)
+                {
+                    favoritesButton.classList.add('active');
+                }
             }
             renderFavorites();
-            showCountryDetails(searchedCountry, countryDetailsList);
         })
-
-        favoritesLists.appendChild(span);
         favoritesLists.appendChild(img);
+        favoritesLists.appendChild(span);
         favoritesLists.appendChild(del);
     });
 }

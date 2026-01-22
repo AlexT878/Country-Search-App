@@ -32,11 +32,15 @@
 
 #favorites_lists {
     display: grid;
-    grid-template-columns: 2fr 1fr 0.3fr;
+    grid-template-columns: 0.5fr 1fr 2fr;
     align-items: center;
 
     span {
         cursor: pointer;
+        font-size: 17px;
+        &:hover {
+            transform: scale(1.1);
+        }
     }
 
     .del-button-favorites {
@@ -47,10 +51,22 @@
 .country-flag-favorites {
     height: 2.5rem;
     padding: 0.5rem;
+    padding-left: 0;
+    padding-right: 1rem;
     justify-self: center;
     align-items: center;
     filter: drop-shadow(0 0 3px var(--light-blue));
     cursor: pointer;
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
+.del-button-favorites {
+    font-size: 16px;
+    cursor: pointer;
+}
 
+.del-button-favorites:hover {
+    transform: scale(1.1); 
+}
