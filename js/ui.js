@@ -185,6 +185,10 @@ export function renderHistory()
     historyData.forEach(name => {
         const li = document.createElement("li");
         li.textContent = name;
+        li.addEventListener('click', async () => {
+            const country = await getCountryData(name);
+            showCountryDetails(country, countryDetailsList);
+        });
         historyList.append(li);
     })
 }
