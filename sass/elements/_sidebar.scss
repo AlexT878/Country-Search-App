@@ -29,3 +29,44 @@
 .sidebar-favorites li:not(:first-child):hover {
     background-color: var(--light-cyan);
 }
+
+#favorites_lists {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 2fr;
+    align-items: center;
+
+    span {
+        cursor: pointer;
+        font-size: 17px;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    .del-button-favorites {
+        justify-self: flex-end;
+    }
+}
+
+.country-flag-favorites {
+    height: 2.5rem;
+    padding: 0.5rem;
+    padding-left: 0;
+    padding-right: 1rem;
+    justify-self: center;
+    align-items: center;
+    filter: drop-shadow(0 0 3px var(--light-blue));
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.del-button-favorites {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.del-button-favorites:hover {
+    transform: scale(1.1); 
+}

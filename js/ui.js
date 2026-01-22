@@ -1,8 +1,12 @@
+import { getCountryData } from "./service.js";
 import { isCountryFavorite } from "./storage.js";
 import { addToFavorites } from "./storage.js";
 
-const favoritesList = document.getElementById("favorites_list");
 const historyList = document.getElementById("search-history-list");
+const favoritesLists = document.getElementById("favorites_lists");
+const countryDetailsList = document.getElementById("details_list");
+let favoritesButton;
+let currentCountryName = "";
 
 export function addListItem(text, list, end)
 {
@@ -20,6 +24,9 @@ export function addListItem(text, list, end)
 
 export function showCountryDetails(country, list)
 {
+    list.textContent = "";
+    currentCountryName = country.name.common;
+
     const flagUrl = country.flags.svg;
     const capital = country.capital;
     const population = country.population.toLocaleString();
@@ -35,15 +42,36 @@ export function showCountryDetails(country, list)
     addListItem("Language: " + language, list, true);
     addListItem("Area: " + area + ' km²', list, true);
     addLinkToList("Map: " + mapLink, "Google Maps", list, true);
-    renderFavoriteButton(country.name.common, list);
+    renderFavoriteButton(country, list);
+
+    if(isCountryFavorite(country.name.common)) {
+        const region = country.region;
+        const drivingSide = country.car.side;
+        const [first, ...rest] = drivingSide;
+        const drivingSideFormatted = first.toUpperCase() + rest.join('');
+        const unMember = country.unMember;
+        const internetDomain = country.tld[0];
+        console.log(internetDomain);
+        addListItem("Region: " + region, list, true);
+        addListItem("Driving side: " + drivingSideFormatted, list, true);
+        if(unMember == true)
+        {
+            addListItem("UN Member: Yes", list, true);
+        }
+        else
+        {
+            addListItem("UN Member: No", list, true);
+        }
+        addListItem("Internet domain: " + internetDomain.toUpperCase(), list, true);
+    }
 }
 
-function renderFavoriteButton(countryName, list)
+function renderFavoriteButton(country, list)
 {
-    const liFavorite = document.createElement('li');
+    const countryName = country.name.common;
     const template = document.getElementById('star-template');
     const starClone = template.content.cloneNode(true);
-    const favoritesButton = starClone.querySelector('.star-btn');
+    favoritesButton = starClone.querySelector('.star-btn');
 
     if (isCountryFavorite(countryName)) 
     {
@@ -51,7 +79,7 @@ function renderFavoriteButton(countryName, list)
     }
 
     favoritesButton.addEventListener("click", () => {
-        if(addToFavorites(countryName))
+        if(addToFavorites(country))
         {
             favoritesButton.classList.remove('active');
         }
@@ -59,6 +87,7 @@ function renderFavoriteButton(countryName, list)
         {
             favoritesButton.classList.add('active');
         }
+        showCountryDetails(country, countryDetailsList);
         renderFavorites();
     })
     
@@ -72,7 +101,6 @@ function addFlagImage(url, list)
     const img = document.createElement('img');
     img.src = url;
     img.classList.add("country-flag"); // CSS class for the image itself
-
     liElement.append(img);
     list.append(liElement);
 }
@@ -92,17 +120,51 @@ export function renderFavorites()
 {
     const favoritesData = JSON.parse(localStorage.getItem("countryFavorites")) || [];
 
-    favoritesList.innerHTML = "";
+    favoritesLists.innerHTML = "";
 
     if (favoritesData.length === 0) {
-        favoritesList.innerHTML = "<li>List is empty</li>";
+        favoritesLists.innerHTML = "List is empty";
         return;
     }
 
-    favoritesData.forEach(name => {
-        const li = document.createElement("li");
-        li.textContent = name;
-        favoritesList.append(li);
+    favoritesData.forEach(country => {
+        const span = document.createElement("span");
+        const img = document.createElement("img");
+        const del = document.createElement("i");
+        del.className = "fa-solid fa-trash-can del-button-favorites";
+        span.textContent = country.name;
+        del.classList.add("del-button-favorites");
+        img.src = country.url;
+        img.classList.add("country-flag-favorites"); 
+        img.addEventListener("click", async () => {
+            showCountryDetails(await getCountryData(country.name), countryDetailsList);
+        })
+        span.addEventListener("click", async () => {
+            showCountryDetails(await getCountryData(country.name), countryDetailsList);
+        })
+        del.addEventListener("click", async () => {
+            let searchedCountry = await getCountryData(country.name);
+            if(addToFavorites(searchedCountry))
+            {
+                del.classList.remove('active');
+                if(currentCountryName == country.name)
+                {
+                    favoritesButton.classList.remove('active');
+                }
+            }
+            else
+            {
+                del.classList.add('active');
+                if(currentCountryName == country.name)
+                {
+                    favoritesButton.classList.add('active');
+                }
+            }
+            renderFavorites();
+        })
+        favoritesLists.appendChild(img);
+        favoritesLists.appendChild(span);
+        favoritesLists.appendChild(del);
     });
 }
 

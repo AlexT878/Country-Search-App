@@ -309,6 +309,45 @@ header h2 {
   background-color: var(--light-cyan);
 }
 
+#favorites_lists {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 2fr;
+  align-items: center;
+}
+#favorites_lists span {
+  cursor: pointer;
+  font-size: 17px;
+}
+#favorites_lists span:hover {
+  transform: scale(1.1);
+}
+#favorites_lists .del-button-favorites {
+  justify-self: flex-end;
+}
+
+.country-flag-favorites {
+  height: 2.5rem;
+  padding: 0.5rem;
+  padding-left: 0;
+  padding-right: 1rem;
+  justify-self: center;
+  align-items: center;
+  filter: drop-shadow(0 0 3px var(--light-blue));
+  cursor: pointer;
+}
+.country-flag-favorites:hover {
+  transform: scale(1.1);
+}
+
+.del-button-favorites {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.del-button-favorites:hover {
+  transform: scale(1.1);
+}
+
 @media (max-width: 768px) {
   .main-layout {
     flex-direction: column;
