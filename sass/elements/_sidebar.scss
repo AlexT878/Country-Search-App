@@ -4,30 +4,30 @@
     @extend %card-base;
     flex: 1;
     height: fit-content;
-}
 
-.sidebar-favorites h2 {
-    margin-top: 0;
-    font-size: 1.25rem;
-    color: var(--jet-black);
-    border-bottom: 2px solid var(--cool-steel);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
+    h2 {
+        margin-top: 0;
+        font-size: 1.25rem;
+        color: var(--jet-black);
+        border-bottom: 2px solid var(--cool-steel);
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }   
 
-.sidebar-favorites ul {
-    list-style: none;
-    padding: 0;
-}
+    ul {
+        list-style: none;
+        padding: 0;
+    }
 
-.sidebar-favorites li {
-    padding: 8px 12px;
-    border-radius: 8px;
-    margin-bottom: 5px;
-}
+    li {
+        padding: 8px 12px;
+        border-radius: 8px;
+        margin-bottom: 5px;
 
-.sidebar-favorites li:not(:first-child):hover {
-    background-color: var(--light-cyan);
+        &:not(:first-child):hover {
+            background-color: var(--light-cyan);
+        }
+    }
 }
 
 #favorites_lists {
@@ -45,6 +45,10 @@
 
     .del-button-favorites {
         justify-self: flex-end;
+    }
+
+    &.is-empty {
+        @include mixins.flex-layout(flex-start, center);
     }
 }
 
@@ -65,8 +69,8 @@
 .del-button-favorites {
     font-size: 16px;
     cursor: pointer;
-}
 
-.del-button-favorites:hover {
-    transform: scale(1.1); 
+    &:hover {
+        transform: scale(1.1); 
+    }
 }

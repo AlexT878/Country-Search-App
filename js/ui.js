@@ -119,10 +119,12 @@ function addLinkToList(link, text, list)
 export function renderFavorites()
 {
     const favoritesData = JSON.parse(localStorage.getItem("countryFavorites")) || [];
-
+    
     favoritesLists.innerHTML = "";
+    favoritesLists.classList.remove("is-empty");
 
     if (favoritesData.length === 0) {
+        favoritesLists.classList.add("is-empty");
         favoritesLists.innerHTML = "List is empty";
         return;
     }
@@ -183,6 +185,10 @@ export function renderHistory()
     historyData.forEach(name => {
         const li = document.createElement("li");
         li.textContent = name;
+        li.addEventListener('click', async () => {
+            const country = await getCountryData(name);
+            showCountryDetails(country, countryDetailsList);
+        });
         historyList.append(li);
     })
 }

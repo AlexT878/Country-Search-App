@@ -103,12 +103,9 @@ header::before {
   z-index: 0;
 }
 
-.navbar, header h2 {
+header h2 {
   position: relative;
   z-index: 1;
-}
-
-header h2 {
   font-size: 20px;
 }
 
@@ -137,7 +134,6 @@ header h2 {
   outline: none;
   color: var(--jet-black);
 }
-
 #country_input:focus {
   border-color: var(--blue-slate);
 }
@@ -153,7 +149,6 @@ header h2 {
   cursor: pointer;
   transition: opacity 0.2s;
 }
-
 #search_button:hover {
   background-color: var(--jet-black);
 }
@@ -168,7 +163,6 @@ header h2 {
   flex-wrap: wrap;
   gap: 10px;
 }
-
 .history-section ul li {
   background-color: var(--light-blue);
   color: var(--jet-black);
@@ -178,7 +172,6 @@ header h2 {
   font-weight: 500;
   cursor: pointer;
 }
-
 .history-section ul li:hover {
   background-color: var(--blue-slate);
   color: var(--white);
@@ -284,7 +277,6 @@ header h2 {
   flex: 1;
   height: fit-content;
 }
-
 .sidebar-favorites h2 {
   margin-top: 0;
   font-size: 1.25rem;
@@ -293,18 +285,15 @@ header h2 {
   padding-bottom: 10px;
   margin-bottom: 15px;
 }
-
 .sidebar-favorites ul {
   list-style: none;
   padding: 0;
 }
-
 .sidebar-favorites li {
   padding: 8px 12px;
   border-radius: 8px;
   margin-bottom: 5px;
 }
-
 .sidebar-favorites li:not(:first-child):hover {
   background-color: var(--light-cyan);
 }
@@ -323,6 +312,12 @@ header h2 {
 }
 #favorites_lists .del-button-favorites {
   justify-self: flex-end;
+}
+#favorites_lists.is-empty {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: no-wrap;
 }
 
 .country-flag-favorites {
@@ -343,7 +338,6 @@ header h2 {
   font-size: 16px;
   cursor: pointer;
 }
-
 .del-button-favorites:hover {
   transform: scale(1.1);
 }

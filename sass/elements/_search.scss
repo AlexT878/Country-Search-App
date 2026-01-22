@@ -23,10 +23,10 @@
     font-size: 1rem;
     outline: none;
     color: var(--jet-black);
-}
 
-#country_input:focus {
-    border-color: var(--blue-slate);
+    &:focus {
+        border-color: var(--blue-slate);
+    }
 }
 
 #search_button {
@@ -34,10 +34,10 @@
     padding: 10px 16px;
     cursor: pointer;
     transition: opacity 0.2s;
-}
 
-#search_button:hover {
-    background-color: var(--jet-black);
+    &:hover {
+        background-color: var(--jet-black);
+    }
 }
 
 .history-section ul {
@@ -46,21 +46,21 @@
     margin: 0 0 2rem 0;
     @include mixins.flex-layout(center, center, wrap);
     gap: 10px;
-}
 
-.history-section ul li {
-    background-color: var(--light-blue);
-    color: var(--jet-black);
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-}
+    li {
+        background-color: var(--light-blue);
+        color: var(--jet-black);
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
 
-.history-section ul li:hover {
-    background-color: var(--blue-slate);
-    color: var(--white);
+        &:hover {
+            background-color: var(--blue-slate);
+            color: var(--white);
+        }
+    }
 }
 
 #error_msg {
