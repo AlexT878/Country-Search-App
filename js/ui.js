@@ -1,8 +1,8 @@
 import { isCountryFavorite } from "./storage.js";
 import { addToFavorites } from "./storage.js";
 
-const favoritesList = document.getElementById("favorites_list");
 const historyList = document.getElementById("search-history-list");
+const favoritesLists = document.getElementById("favorites_lists");
 
 export function addListItem(text, list, end)
 {
@@ -35,12 +35,12 @@ export function showCountryDetails(country, list)
     addListItem("Language: " + language, list, true);
     addListItem("Area: " + area + ' km²', list, true);
     addLinkToList("Map: " + mapLink, "Google Maps", list, true);
-    renderFavoriteButton(country.name.common, list);
+    renderFavoriteButton(country, list);
 }
 
-function renderFavoriteButton(countryName, list)
+function renderFavoriteButton(country, list)
 {
-    const liFavorite = document.createElement('li');
+    const countryName = country.name.common;
     const template = document.getElementById('star-template');
     const starClone = template.content.cloneNode(true);
     const favoritesButton = starClone.querySelector('.star-btn');
@@ -51,7 +51,7 @@ function renderFavoriteButton(countryName, list)
     }
 
     favoritesButton.addEventListener("click", () => {
-        if(addToFavorites(countryName))
+        if(addToFavorites(country))
         {
             favoritesButton.classList.remove('active');
         }
@@ -92,17 +92,21 @@ export function renderFavorites()
 {
     const favoritesData = JSON.parse(localStorage.getItem("countryFavorites")) || [];
 
-    favoritesList.innerHTML = "";
+    favoritesLists.innerHTML = "";
 
     if (favoritesData.length === 0) {
-        favoritesList.innerHTML = "<li>List is empty</li>";
+        favoritesLists.innerHTML = "List is empty";
         return;
     }
 
-    favoritesData.forEach(name => {
-        const li = document.createElement("li");
-        li.textContent = name;
-        favoritesList.append(li);
+    favoritesData.forEach(country => {
+        const span = document.createElement("span");
+        const img = document.createElement("img");
+        span.textContent = country.name;
+        img.src = country.url;
+        img.classList.add("country-flag-favorites"); 
+        favoritesLists.appendChild(span);
+        favoritesLists.appendChild(img);
     });
 }
 

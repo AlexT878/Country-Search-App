@@ -309,6 +309,19 @@ header h2 {
   background-color: var(--light-cyan);
 }
 
+#favorites_lists {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.country-flag-favorites {
+  height: 2.5rem;
+  padding: 0.5rem;
+  justify-self: end;
+  filter: drop-shadow(0 0 3px var(--light-blue));
+}
+
 @media (max-width: 768px) {
   .main-layout {
     flex-direction: column;
