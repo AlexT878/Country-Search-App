@@ -324,6 +324,12 @@ header h2 {
 #favorites_lists .del-button-favorites {
   justify-self: flex-end;
 }
+#favorites_lists.is-empty {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: no-wrap;
+}
 
 .country-flag-favorites {
   height: 2.5rem;

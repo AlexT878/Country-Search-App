@@ -119,10 +119,12 @@ function addLinkToList(link, text, list)
 export function renderFavorites()
 {
     const favoritesData = JSON.parse(localStorage.getItem("countryFavorites")) || [];
-
+    
     favoritesLists.innerHTML = "";
+    favoritesLists.classList.remove("is-empty");
 
     if (favoritesData.length === 0) {
+        favoritesLists.classList.add("is-empty");
         favoritesLists.innerHTML = "List is empty";
         return;
     }

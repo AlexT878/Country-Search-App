@@ -46,6 +46,10 @@
     .del-button-favorites {
         justify-self: flex-end;
     }
+
+    &.is-empty {
+        @include mixins.flex-layout(flex-start, center);
+    }
 }
 
 .country-flag-favorites {
