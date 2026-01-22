@@ -34,6 +34,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+
+    span {
+        cursor: pointer;
+    }
 }
 
 .country-flag-favorites {
@@ -41,4 +45,6 @@
     padding: 0.5rem;
     justify-self: end;
     filter: drop-shadow(0 0 3px var(--light-blue));
+    cursor: pointer;
 }
+

@@ -1,8 +1,10 @@
+import { getCountryData } from "./service.js";
 import { isCountryFavorite } from "./storage.js";
 import { addToFavorites } from "./storage.js";
 
 const historyList = document.getElementById("search-history-list");
 const favoritesLists = document.getElementById("favorites_lists");
+const countryDetailsList = document.getElementById("details_list");
 
 export function addListItem(text, list, end)
 {
@@ -20,6 +22,8 @@ export function addListItem(text, list, end)
 
 export function showCountryDetails(country, list)
 {
+    list.textContent = "";
+
     const flagUrl = country.flags.svg;
     const capital = country.capital;
     const population = country.population.toLocaleString();
@@ -72,7 +76,6 @@ function addFlagImage(url, list)
     const img = document.createElement('img');
     img.src = url;
     img.classList.add("country-flag"); // CSS class for the image itself
-
     liElement.append(img);
     list.append(liElement);
 }
@@ -105,6 +108,13 @@ export function renderFavorites()
         span.textContent = country.name;
         img.src = country.url;
         img.classList.add("country-flag-favorites"); 
+        img.addEventListener("click", async () => {
+            showCountryDetails(await getCountryData(country.name), countryDetailsList);
+        })
+        span.addEventListener("click", async () => {
+            showCountryDetails(await getCountryData(country.name), countryDetailsList);
+        })
+
         favoritesLists.appendChild(span);
         favoritesLists.appendChild(img);
     });

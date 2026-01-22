@@ -314,12 +314,16 @@ header h2 {
   grid-template-columns: 1fr 1fr;
   align-items: center;
 }
+#favorites_lists span {
+  cursor: pointer;
+}
 
 .country-flag-favorites {
   height: 2.5rem;
   padding: 0.5rem;
   justify-self: end;
   filter: drop-shadow(0 0 3px var(--light-blue));
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
